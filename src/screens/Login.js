@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Button, View } from 'react-native';
-import Icon from 'react-native-ionicons'
-import { Image } from 'react-native'
-import { TextInput } from 'react-native-gesture-handler';
+import { Icon } from 'react-native-elements';
+import { StyleSheet } from 'react-native';
+import { Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
+import { Alert } from 'react-native';
+import COLORS from '../assets/colors';
 
 const TabIcon = (props) => (
     <Icon
@@ -14,14 +15,19 @@ const TabIcon = (props) => (
 
 export default class Login extends Component {
     static navigationOptions = {
-        tabBarIcon: TabIcon
+        tabBarIcon: TabIcon,
+        headerShown: false,
+        headerTitleStyle: {
+            color: COLORS.beige,
+        },
     };
 
     constructor(props) {
         super(props);
 
         this.state = {
-
+            username: '',
+            password: ''
         };
     }
 
@@ -29,43 +35,40 @@ export default class Login extends Component {
 
     }
 
+    signIn() {
+        if (this.state.username === '' || this.state.password === '') {
+            Alert.alert('Please Fill Out Both Fields');
+        } else {
+
+            this.props.navigation.navigate('Home');
+        }
+    }
+
     render() {
         return (
-            <View style={{flex: 1, backgroundColor: '#FEF2E4'}}>
-                <Image
-                    style={{flex:1, height: undefined, width:undefined}}
-                    source ={require('../images/logo.png')} 
-                    resizeMode="contain"
-                    
-                    />
-                    <View>
-                        <TextInput style = {{margin:15,height:40, borderColor: '#3B291E',borderWidth:1}}
-                        underlineColorAndroid = "transparent"
-                        placeholder="Email"
-                        placeholderTextColor="#3B291E"
-                        autoCapitalize="none"
-
-                        />
-                    </View>
-                    <View>
-                    <TextInput style = {{margin:15,height:40, borderColor: '#3B291E',borderWidth:1}}
-                        underlineColorAndroid = "transparent"
-                        placeholder="Password"
-                        placeholderTextColor="#3B291E"
-                        autoCapitalize="none"
-                        
-                        />
-                    </View>
-                    <View>
-                    <Button
-                    title="Login"
-                    style={{alignItems: 'center', margin:10,heigh:40}}
-                    />
-                    </View>
-                    
-            
-            </View>
-
+            <Container style={{ backgroundColor: COLORS.darkGrey}}>
+                <Content padder>
+                <Form>
+                    <Item floatingLabel>
+                    <Label style={styles.textColor}>Username</Label>
+                    <Input style={styles.textColor} onChangeText={(text) => {this.setState({username: text})}}/>
+                    </Item>
+                    <Item floatingLabel last>
+                    <Label style={styles.textColor}>Password</Label>
+                    <Input style={styles.textColor} onChangeText={(text) => {this.setState({password: text})}}/>
+                    </Item>
+                </Form>
+                <Content style={{ paddingTop: 20}}>
+                    <Button style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.cyan}} onPress={() => { this.signIn() }}><Text style={styles.textColor}> Login </Text></Button>
+                </Content>
+                </Content>
+            </Container>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    textColor: {
+        color: COLORS.beige
+    }
+})
