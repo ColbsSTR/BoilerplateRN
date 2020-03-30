@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View , Button} from 'react-native';
 import { Icon } from 'react-native-elements'
+import { addOne } from '../state/Actions/addOne';
+import { connect } from 'react-redux';
 
 const TabIcon = (props) => (
     <Icon
@@ -10,7 +12,7 @@ const TabIcon = (props) => (
     />
 )
 
-export default class Profile extends Component {
+class Profile extends Component {
     static navigationOptions = {
         tabBarIcon: TabIcon
     };
@@ -24,14 +26,35 @@ export default class Profile extends Component {
     }
 
     componentDidMount() {
-
+        console.log('state', this.props.state);
     }
 
     render() {
         return (
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <Text>Hello from the profile screen</Text>
+                <Text>Hello from profile screen</Text>
+                <Button
+                    title="Press to add one"
+                    onPress={() => {this.props.AddOne()}}
+                />
+                {/* <Text>Current count: {this.props.count}</Text> */}
             </View>
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        count: state
+    };
+};
+
+const mapDispatchToProps = () => {
+    return {
+        AddOne: addOne
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+
+
