@@ -26,7 +26,7 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        console.log('state', this.props.state);
+        console.log('state', this.props.count.addOne);
     }
 
     render() {
@@ -37,7 +37,7 @@ class Profile extends Component {
                     title="Press to add one"
                     onPress={() => {this.props.AddOne()}}
                 />
-                {/* <Text>Current count: {this.props.count}</Text> */}
+                <Text>Current count: {this.props.count.addOne.val}</Text>
             </View>
         );
     }
@@ -49,10 +49,8 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = () => {
-    return {
-        AddOne: addOne
-    };
+const mapDispatchToProps = {
+    AddOne: addOne
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

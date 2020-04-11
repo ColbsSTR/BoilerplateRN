@@ -1,4 +1,4 @@
-import ADD_ONE from '../Actions/actionTypes';
+import { ADD_ONE } from '../Actions/actionTypes';
 
 const INITIAL_STATE = {
     val: 0,
@@ -7,9 +7,9 @@ const INITIAL_STATE = {
 const addOne = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ADD_ONE:
-            return { ...state, val: val += 1}
+            return { ...state, val: 2 }
         default:
-          return state
+          return state;
       }
 }
 

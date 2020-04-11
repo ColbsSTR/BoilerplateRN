@@ -1,4 +1,4 @@
-import ADD_ONE from './actionTypes';
+import { ADD_ONE } from './actionTypes';
 
 export const addOne = () => {
     return {

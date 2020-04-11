@@ -5,6 +5,6 @@ const AppReducers = combineReducers({
     addOne
 });
 
-const store = createStore(AppReducers);
+const appStore = createStore(AppReducers);
 
-export default store;
+export default appStore;
